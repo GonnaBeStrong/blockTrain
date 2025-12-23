@@ -1,4 +1,4 @@
-package com.sixoneseven.blocktrain;
+package com.sixoneseven.blocktrain.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
