@@ -1,6 +1,5 @@
 package com.sixoneseven.blocktrain.service;
 
-
 import com.sixoneseven.blocktrain.entity.DataAsset;
 import com.sixoneseven.blocktrain.fabric.FabricClient;
 import com.sixoneseven.blocktrain.repo.DataAssetRepository;
@@ -10,13 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
 public class DataService {
 
-    private static final String BASE_PATH = "data_storage/";
+    private static final String BASE_PATH = "D:/BlockChain/blockTrain/data_storage/";
 
     @Autowired
     private DataAssetRepository repository;
@@ -25,22 +25,35 @@ public class DataService {
     private FabricClient fabricClient;
 
     public DataAsset upload(MultipartFile file, String dataName, String dataType) throws Exception {
-
-        // 1️⃣ 保存文件到本地
+        // 1️⃣ 确保本地存储目录存在
         File dir = new File(BASE_PATH);
-        if (!dir.exists()) dir.mkdirs();
+        if (!dir.exists() && !dir.mkdirs()) {
+            throw new IOException("无法创建存储目录: " + BASE_PATH);
+        }
 
+        // 2️⃣ 构建文件路径
         String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
         File dest = new File(dir, filename);
-        file.transferTo(dest);
 
-        // 2️⃣ 计算 Hash
+        // 确保父目录存在
+        if (!dest.getParentFile().exists() && !dest.getParentFile().mkdirs()) {
+            throw new IOException("无法创建文件父目录: " + dest.getParent());
+        }
+
+        // 3️⃣ 保存文件
+        try {
+            file.transferTo(dest);
+        } catch (IOException e) {
+            throw new IOException("文件保存失败: " + e.getMessage(), e);
+        }
+
+        // 4️⃣ 计算 Hash
         String hash = HashUtil.sha256(dest);
 
-        // 3️⃣ 模拟上链，获取 TxID
+        // 5️⃣ 模拟上链，获取 TxID
         String txId = fabricClient.putMetadata(filename, hash);
 
-        // 4️⃣ 保存元数据
+        // 6️⃣ 保存元数据
         DataAsset asset = new DataAsset();
         asset.setDataName(dataName);
         asset.setDataType(dataType);
@@ -56,7 +69,10 @@ public class DataService {
         DataAsset asset = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("数据不存在"));
 
-        return new File(asset.getFilePath());
+        File file = new File(asset.getFilePath());
+        if (!file.exists()) {
+            throw new RuntimeException("文件不存在: " + file.getAbsolutePath());
+        }
+        return file;
     }
 }
-
