@@ -27,7 +27,7 @@ public class CredentialService {
         DataAsset asset = repository.findById(dataId)
                 .orElseThrow(() -> new RuntimeException("数据不存在"));
 
-        // ① 本地重新计算 Hash
+        // ① 本地重新计算 Hash（最严谨）
         File file = new File(asset.getFilePath());
         String localHash = HashUtil.sha256(file);
 
@@ -39,9 +39,12 @@ public class CredentialService {
 
         // ④ 返回可信凭证
         Map<String, Object> result = new HashMap<>();
+        result.put("dataId", dataId);
         result.put("fileHash", localHash);
         result.put("chainHash", chainHash);
+        result.put("txId", asset.getTxId());
         result.put("verified", verified);
+        result.put("verifyTime", LocalDateTime.now());
 
         return result;
     }
