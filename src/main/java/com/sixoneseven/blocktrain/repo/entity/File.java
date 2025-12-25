@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Data
 public class File {
 
-    // 数据id dataId
+    // 数据id dataId 数据库自动生成，无需填充
     private Long id;
 
     // 文件路径

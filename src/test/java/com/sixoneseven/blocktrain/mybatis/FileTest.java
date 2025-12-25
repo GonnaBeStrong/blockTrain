@@ -23,9 +23,17 @@ class FileTest {
     }
 
     @Test
-    public void getAllFile() {
+    public void getAllFileTest() {
         List<File> allFile = fileMapper.getAllFile();
         allFile.forEach(System.out::println);
+    }
+
+    @Test
+    public void insertOneFileTest() {
+        File file = new File();
+        file.setDetail("这是测试6");
+        int i = fileMapper.insertOneFile(file);
+        System.out.println(i);
     }
 
 }

@@ -34,11 +34,33 @@
     </select>
 
     <!-- 插入文件地址 -->
-    <insert id="insert" parameterType="com.sixoneseven.blocktrain.repo.entity.File" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertOneFile" parameterType="com.sixoneseven.blocktrain.repo.entity.File" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO file (
-            path
+            path,
+            size,
+            resolution,
+            detail,
+            upload_time,
+            name,
+            `from`,
+            form,
+            longitude,
+            latitude,
+            lite,
+            shoot_time
         ) VALUES (
-                     #{path,jdbcType=VARCHAR}
+                     #{path,jdbcType=VARCHAR},
+                     #{size,jdbcType=VARCHAR},
+                     #{resolution,jdbcType=VARCHAR},
+                     #{detail,jdbcType=VARCHAR},
+                     #{uploadTime,jdbcType=TIMESTAMP},
+                     #{from,jdbcType=VARCHAR},
+                     #{form,jdbcType=VARCHAR},
+                     #{name,jdbcType=VARCHAR},
+                     #{longitude,jdbcType=VARCHAR},
+                     #{latitude,jdbcType=VARCHAR},
+                     #{lite,jdbcType=VARCHAR},
+                     #{shootTime,jdbcType=TIMESTAMP}
                  )
     </insert>
 

@@ -77,4 +77,11 @@ public class UserService {
         return fileMapper.getAllFile();
     }
 
+    // 插入数据库成功返回true，失败返回false
+    // 插入前请填充字段（除id字段，此字段数据库自动生成）
+    public Boolean insertOneFile(File file) {
+        int i = fileMapper.insertOneFile(file);
+        return i == 1;
+    }
+
 }

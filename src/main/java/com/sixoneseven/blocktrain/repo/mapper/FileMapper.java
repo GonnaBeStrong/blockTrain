@@ -13,4 +13,6 @@ public interface FileMapper {
 
     public List<File> getAllFile();
 
+    public int insertOneFile(File file);
+
 }
