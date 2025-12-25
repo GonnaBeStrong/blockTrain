@@ -7,13 +7,24 @@
     <resultMap id="BaseResultMap" type="com.sixoneseven.blocktrain.repo.entity.File">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="size" property="size" jdbcType="VARCHAR"/>
+        <result column="resolution" property="resolution" jdbcType="VARCHAR"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="from" property="from" jdbcType="VARCHAR"/>
+        <result column="form" property="form" jdbcType="VARCHAR"/>
+        <result column="longitude" property="longitude" jdbcType="VARCHAR"/>
+        <result column="latitude" property="latitude" jdbcType="VARCHAR"/>
+        <result column="lite" property="lite" jdbcType="VARCHAR"/>
+        <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP"/>
+        <result column="shoot_time" property="shootTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <!-- 根据ID查询文件地址 -->
-    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        SELECT id,path
+    <!-- 根据ID查询文件信息 -->
+    <select id="getFileByDataId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT id,path,size,resolution,detail,name,`from`,form,upload_time,longitude,latitude,lite,shoot_time
         FROM file
-        WHERE id = #{id,jdbcType=BIGINT}
+        WHERE id = #{dataId,jdbcType=BIGINT}
     </select>
 
     <!-- 插入文件地址 -->

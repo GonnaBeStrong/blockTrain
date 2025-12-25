@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sixoneseven.blocktrain.repo.mapper.OrderMapper">
+
+    <!-- 1. 定义结果映射 -->
+    <resultMap id="BaseResultMap" type="com.sixoneseven.blocktrain.repo.entity.Order">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="data_id" property="dataId" jdbcType="INTEGER"/>
+
+        <!-- MySQL datetime/timestamp 映射到 java.sql.Timestamp -->
+        <result column="buy_time" property="buyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getOrderByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT id,user_id,data_id,buy_time
+        FROM `order`
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+</mapper>

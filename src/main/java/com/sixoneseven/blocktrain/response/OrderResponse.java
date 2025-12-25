@@ -1,14 +1,14 @@
-package com.sixoneseven.blocktrain.repo.entity;
+package com.sixoneseven.blocktrain.response;
 
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
-public class File {
+public class OrderResponse {
 
     // 数据id dataId
-    private Long id;
+    private Integer id;
 
     // 文件路径
     private String path;
@@ -45,4 +45,10 @@ public class File {
 
     // 拍摄时间
     private Timestamp shootTime;
+
+    // 订单号
+    public Integer orderId;
+
+    public Timestamp buyTime;
+
 }
