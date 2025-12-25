@@ -27,6 +27,12 @@
         WHERE id = #{dataId,jdbcType=BIGINT}
     </select>
 
+
+    <select id="getAllFile" resultMap="BaseResultMap">
+        SELECT id,path,size,resolution,detail,name,`from`,form,upload_time,longitude,latitude,lite,shoot_time
+        FROM file
+    </select>
+
     <!-- 插入文件地址 -->
     <insert id="insert" parameterType="com.sixoneseven.blocktrain.repo.entity.File" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO file (

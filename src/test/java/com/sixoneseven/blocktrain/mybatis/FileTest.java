@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 class FileTest {
 
@@ -18,6 +20,12 @@ class FileTest {
     public void getDataByIdTest() {
         File fileByDataId = fileMapper.getFileByDataId(1);
         System.out.println(fileByDataId);
+    }
+
+    @Test
+    public void getAllFile() {
+        List<File> allFile = fileMapper.getAllFile();
+        allFile.forEach(System.out::println);
     }
 
 }

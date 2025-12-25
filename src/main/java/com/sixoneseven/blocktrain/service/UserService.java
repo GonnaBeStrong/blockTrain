@@ -73,4 +73,8 @@ public class UserService {
         return list;
     }
 
+    public List<File> allFiles() {
+        return fileMapper.getAllFile();
+    }
+
 }

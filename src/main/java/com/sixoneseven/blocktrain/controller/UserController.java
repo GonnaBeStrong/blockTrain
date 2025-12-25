@@ -43,6 +43,14 @@ public class UserController {
         return new CommonResp<>(orders);
     }
 
+    @PostMapping("/all-file")
+    public CommonResp<List<File>> orders() {
+
+        System.out.println("所有订单");
+        List<File> files = userService.allFiles();
+        return new CommonResp<>(files);
+    }
+
 
 
 }
