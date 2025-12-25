@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/credential")
 public class CredentialController {
@@ -16,7 +18,10 @@ public class CredentialController {
      * 查询可信凭证
      */
     @GetMapping("/query/{dataId}")
-    public ResponseEntity<?> query(@PathVariable Long dataId) {
-        return ResponseEntity.ok(credentialService.getCredential(dataId));
+    public ResponseEntity<Map<String, Object>> query(
+            @PathVariable Long dataId) throws Exception {
+
+        Map<String, Object> credential = credentialService.getCredential(dataId);
+        return ResponseEntity.ok(credential);
     }
 }

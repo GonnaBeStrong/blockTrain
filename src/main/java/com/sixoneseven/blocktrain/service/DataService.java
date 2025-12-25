@@ -1,6 +1,6 @@
 package com.sixoneseven.blocktrain.service;
 
-import com.sixoneseven.blocktrain.entity.DataAsset;
+import com.sixoneseven.blocktrain.repo.entity.DataAsset;
 import com.sixoneseven.blocktrain.fabric.FabricClient;
 import com.sixoneseven.blocktrain.repo.DataAssetRepository;
 import com.sixoneseven.blocktrain.util.HashUtil;

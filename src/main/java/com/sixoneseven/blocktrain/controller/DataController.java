@@ -1,6 +1,6 @@
 package com.sixoneseven.blocktrain.controller;
 
-import com.sixoneseven.blocktrain.entity.DataAsset;
+import com.sixoneseven.blocktrain.repo.entity.DataAsset;
 import com.sixoneseven.blocktrain.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
