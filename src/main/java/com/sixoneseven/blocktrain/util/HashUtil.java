@@ -1,12 +1,11 @@
 package com.sixoneseven.blocktrain.util;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.security.MessageDigest;
 
 public class HashUtil {
 
-    public static String sha256(File file) {
+    public static String sha256(java.io.File file) {
         try (FileInputStream fis = new FileInputStream(file)) {
 
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

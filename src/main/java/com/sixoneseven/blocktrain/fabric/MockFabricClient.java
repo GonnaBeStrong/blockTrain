@@ -12,31 +12,40 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class MockFabricClient implements FabricClient {
 
-    // 🔗 模拟 Fabric 世界状态（链上账本）
-    private static final Map<String, String> WORLD_STATE = new ConcurrentHashMap<>();
+    // 🔗 txId -> fileHash
+    private static final Map<String, String> WORLD_STATE =
+            new ConcurrentHashMap<>();
 
     @Override
     public String putMetadata(String assetId, String hash) {
         try {
-            // 1️⃣ 存“链上状态”
-            WORLD_STATE.put(assetId, hash);
-
-            // 2️⃣ 模拟 Fabric TxID
+            // 1️⃣ 生成 txId
             String raw = assetId + hash + Instant.now().toEpochMilli() + UUID.randomUUID();
 
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] bytes = digest.digest(raw.getBytes(StandardCharsets.UTF_8));
+            String txId = bytesToHex(
+                    digest.digest(raw.getBytes(StandardCharsets.UTF_8))
+            );
 
-            return bytesToHex(bytes);
+            // 2️⃣ 链上状态：txId -> hash
+            WORLD_STATE.put(txId, hash);
+
+            return txId;
         } catch (Exception e) {
             throw new RuntimeException("Mock Fabric 上链失败", e);
         }
     }
 
     @Override
-    public String queryMetadata(String assetId) {
-        return WORLD_STATE.get(assetId);
+    public String queryMetadata(String txId) {
+        return WORLD_STATE.get(txId);
     }
+
+    @Override
+    public String queryHashByTxId(String txId) {
+        return WORLD_STATE.get(txId);
+    }
+
 
     private String bytesToHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
@@ -46,3 +55,4 @@ public class MockFabricClient implements FabricClient {
         return sb.toString();
     }
 }
+
