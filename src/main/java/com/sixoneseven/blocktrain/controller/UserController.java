@@ -3,6 +3,7 @@ package com.sixoneseven.blocktrain.controller;
 import com.sixoneseven.blocktrain.dto.CommonResp;
 import com.sixoneseven.blocktrain.repo.entity.File;
 import com.sixoneseven.blocktrain.repo.entity.Order;
+import com.sixoneseven.blocktrain.request.BuyRequest;
 import com.sixoneseven.blocktrain.request.LoginRequest;
 import com.sixoneseven.blocktrain.request.OrderRequest;
 import com.sixoneseven.blocktrain.response.OrderResponse;
@@ -17,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/user")
@@ -49,6 +51,27 @@ public class UserController {
         System.out.println("所有订单");
         List<File> files = userService.allFiles();
         return new CommonResp<>(files);
+    }
+
+    @PostMapping("/buy")
+    public CommonResp<Boolean> buy(@RequestBody BuyRequest buyRequest) {
+
+        if( Objects.isNull(buyRequest) ||
+                Objects.isNull(buyRequest.getDataId())
+                || Objects.isNull(buyRequest.getUserId())) {
+            CommonResp<Boolean> commonResp = new CommonResp<>();
+            commonResp.setSuccess(false);
+            return commonResp;
+        }
+
+        boolean buy = userService.buy(buyRequest.getUserId(), buyRequest.getDataId());
+        CommonResp<Boolean> booleanCommonResp = new CommonResp<>();
+        booleanCommonResp.setSuccess(buy);
+        booleanCommonResp.setContent(buy);
+        if(Boolean.FALSE.equals(buy)) {
+            booleanCommonResp.setMessage("用户已经购买过");
+        }
+        return booleanCommonResp;
     }
 
 

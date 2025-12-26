@@ -4,11 +4,14 @@ import com.sixoneseven.blocktrain.repo.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
 public interface OrderMapper {
 
     public List<Order> getOrderByUserId(@Param("userId") Integer userId);
+
+    public int insertOrder(Order order);
 
 }

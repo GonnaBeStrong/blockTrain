@@ -19,4 +19,16 @@
         WHERE user_id = #{userId,jdbcType=INTEGER}
     </select>
 
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order` (
+            user_id,
+            data_id,
+            buy_time
+        ) VALUES (
+                     #{userId,jdbcType=VARCHAR},
+                     #{dataId,jdbcType=VARCHAR},
+                     #{buyTime,jdbcType=TIMESTAMP}
+                 )
+    </insert>
+
 </mapper>

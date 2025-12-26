@@ -11,6 +11,7 @@ import com.sixoneseven.blocktrain.response.OrderResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -81,6 +82,27 @@ public class UserService {
     // 插入前请填充字段（除id字段，此字段数据库自动生成）
     public Boolean insertOneFile(File file) {
         int i = fileMapper.insertOneFile(file);
+        return i == 1;
+    }
+
+
+    // todo 用户点击购买逻辑
+    // 点击按钮，发送userId，dataId，后端在order表记录
+    public boolean buy(Integer userId, Integer dataId) {
+
+        List<Order> orders = orderMapper.getOrderByUserId(userId);
+        List<Integer> list = orders.stream().map(Order::getDataId).toList();
+
+        if(Objects.isNull(list) || list.contains(dataId)) {
+            return false;
+        }
+
+        Order order = new Order();
+        order.setUserId(userId);
+        order.setDataId(dataId);
+        order.setBuyTime(new Timestamp(System.currentTimeMillis()));
+        int i = orderMapper.insertOrder(order);
+
         return i == 1;
     }
 

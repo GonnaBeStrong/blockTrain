@@ -23,4 +23,10 @@ public class UserServiceTest {
         });
     }
 
+    @Test
+    public void buyOrderTest() {
+        boolean buy = userService.buy(1, 5);
+        System.out.println(buy);
+    }
+
 }
