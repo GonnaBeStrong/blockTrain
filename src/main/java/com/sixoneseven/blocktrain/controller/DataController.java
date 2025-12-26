@@ -5,7 +5,6 @@ import com.sixoneseven.blocktrain.repo.entity.File;
 import com.sixoneseven.blocktrain.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
