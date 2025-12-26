@@ -10,5 +10,6 @@ public interface FabricClient {
     /**
      * 从链上查询数据摘要
      */
-    String queryMetadata(String assetId);
+    String queryMetadata(String txId);
+
 }

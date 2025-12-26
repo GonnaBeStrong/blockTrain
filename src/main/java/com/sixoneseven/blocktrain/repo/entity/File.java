@@ -13,7 +13,7 @@ public class File {
     // 文件路径
     private String path;
 
-    // 大小
+    // 文件大小
     private String size;
 
     // 分辨率
@@ -34,13 +34,13 @@ public class File {
     // 数据类型
     private String form;
 
-    // 经度
+    // 经纬度
     private String longitude;
 
     // 纬度
     private String latitude;
 
-    // 卫星名字
+    // 卫星名称
     private String lite;
 
     // 拍摄时间
