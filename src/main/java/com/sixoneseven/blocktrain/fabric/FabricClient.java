@@ -12,5 +12,4 @@ public interface FabricClient {
      */
     String queryMetadata(String txId);
 
-    String queryHashByTxId(String txId);
 }

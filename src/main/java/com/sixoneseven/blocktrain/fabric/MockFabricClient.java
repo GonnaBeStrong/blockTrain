@@ -41,12 +41,6 @@ public class MockFabricClient implements FabricClient {
         return WORLD_STATE.get(txId);
     }
 
-    @Override
-    public String queryHashByTxId(String txId) {
-        return WORLD_STATE.get(txId);
-    }
-
-
     private String bytesToHex(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
