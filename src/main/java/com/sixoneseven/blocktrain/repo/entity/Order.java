@@ -2,6 +2,7 @@ package com.sixoneseven.blocktrain.repo.entity;
 
 import lombok.Data;
 
+import java.io.File;
 import java.sql.Timestamp;
 
 @Data

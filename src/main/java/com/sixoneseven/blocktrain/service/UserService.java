@@ -52,6 +52,9 @@ public class UserService {
         List<OrderResponse> list = orders.stream().map(order -> {
             Integer dataId = order.getDataId();
             File file = fileMapper.getFileByDataId(dataId);
+            if(file == null) {
+                return null;
+            }
             OrderResponse orderResponse = new OrderResponse();
             orderResponse.setId(dataId);
             orderResponse.setResolution(file.getResolution());
@@ -69,6 +72,9 @@ public class UserService {
             orderResponse.setBuyTime(order.getBuyTime());
             orderResponse.setOrderId(order.getId());
             return orderResponse;
+        }).filter(a -> {
+            if(a== null) return false;
+            else return true;
         }).toList();
 
         return list;

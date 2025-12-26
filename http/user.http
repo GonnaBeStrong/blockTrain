@@ -19,3 +19,12 @@ Content-Type: application/json
 ###
 POST http://localhost:8080/user/all-file
 Content-Type: application/json
+
+###
+POST http://localhost:8080/user/buy
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "dataId": "9"
+}

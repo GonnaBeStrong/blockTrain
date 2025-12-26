@@ -18,18 +18,19 @@
         <result column="lite" property="lite" jdbcType="VARCHAR"/>
         <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP"/>
         <result column="shoot_time" property="shootTime" jdbcType="TIMESTAMP"/>
+        <result column="asset_id" property="assetId" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!-- 根据ID查询文件信息 -->
     <select id="getFileByDataId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        SELECT id,path,size,resolution,detail,name,`from`,form,upload_time,longitude,latitude,lite,shoot_time
+        SELECT id,path,size,resolution,detail,name,`from`,form,upload_time,longitude,latitude,lite,shoot_time,asset_id
         FROM file
         WHERE id = #{dataId,jdbcType=BIGINT}
     </select>
 
 
     <select id="getAllFile" resultMap="BaseResultMap">
-        SELECT id,path,size,resolution,detail,name,`from`,form,upload_time,longitude,latitude,lite,shoot_time
+        SELECT id,path,size,resolution,detail,name,`from`,form,upload_time,longitude,latitude,lite,shoot_time,asset_id
         FROM file
     </select>
 
@@ -47,7 +48,8 @@
             longitude,
             latitude,
             lite,
-            shoot_time
+            shoot_time,
+            asset_id
         ) VALUES (
                      #{path,jdbcType=VARCHAR},
                      #{size,jdbcType=VARCHAR},
@@ -60,7 +62,8 @@
                      #{longitude,jdbcType=VARCHAR},
                      #{latitude,jdbcType=VARCHAR},
                      #{lite,jdbcType=VARCHAR},
-                     #{shootTime,jdbcType=TIMESTAMP}
+                     #{shootTime,jdbcType=TIMESTAMP},
+                     #{assetId,jdbcType=VARCHAR}
                  )
     </insert>
 

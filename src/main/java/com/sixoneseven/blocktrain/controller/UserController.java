@@ -55,6 +55,7 @@ public class UserController {
 
     @PostMapping("/buy")
     public CommonResp<Boolean> buy(@RequestBody BuyRequest buyRequest) {
+        System.out.println("用户购买");
 
         if( Objects.isNull(buyRequest) ||
                 Objects.isNull(buyRequest.getDataId())

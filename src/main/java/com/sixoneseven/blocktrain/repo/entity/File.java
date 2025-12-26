@@ -45,4 +45,6 @@ public class File {
 
     // 拍摄时间
     private Timestamp shootTime;
+
+    private String assetId;
 }
