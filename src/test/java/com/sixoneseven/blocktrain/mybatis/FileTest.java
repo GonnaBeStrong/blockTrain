@@ -32,7 +32,7 @@ class FileTest {
     public void insertOneFileTest() {
         File file = new File();
         file.setDetail("这是测试自增id");
-        file.setAssetId("Aa");
+        file.setAssetId("bb");
         int i = fileMapper.insertOneFile(file);
         System.out.println(i);
         System.out.println(file.getId());

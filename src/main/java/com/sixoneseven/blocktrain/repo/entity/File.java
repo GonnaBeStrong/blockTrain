@@ -1,12 +1,17 @@
 package com.sixoneseven.blocktrain.repo.entity;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "file")
 @Data
 public class File {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     // 数据id dataId 数据库自动生成，无需填充
     private Long id;
 
