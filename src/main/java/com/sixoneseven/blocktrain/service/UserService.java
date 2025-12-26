@@ -85,9 +85,6 @@ public class UserService {
         return i == 1;
     }
 
-
-    // todo 用户点击购买逻辑
-    // 点击按钮，发送userId，dataId，后端在order表记录
     public boolean buy(Integer userId, Integer dataId) {
 
         List<Order> orders = orderMapper.getOrderByUserId(userId);
