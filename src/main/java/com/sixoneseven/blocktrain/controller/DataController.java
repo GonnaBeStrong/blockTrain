@@ -6,6 +6,7 @@ import com.sixoneseven.blocktrain.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class DataController {
             @RequestParam String longitude,
             @RequestParam String latitude,
             @RequestParam String satellite,
-            @RequestParam LocalDateTime shootTime
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime  shootTime
     ) throws Exception {
         File asset = dataService.upload(
                  file,
