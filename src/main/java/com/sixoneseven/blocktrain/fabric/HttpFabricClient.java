@@ -1,20 +1,11 @@
 package com.sixoneseven.blocktrain.fabric;
 
-// ===== Fabric Gateway SDK（核心）=====
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.Gateway;
-import org.hyperledger.fabric.gateway.Network;
-import org.hyperledger.fabric.gateway.Wallet;
-import org.hyperledger.fabric.gateway.Wallets;
-
 // ===== Spring =====
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 // ===== Java 基础 =====
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 @Component
