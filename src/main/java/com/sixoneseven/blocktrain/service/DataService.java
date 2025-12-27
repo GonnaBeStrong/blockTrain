@@ -98,9 +98,9 @@ public class DataService {
                 .orElseThrow(() -> new RuntimeException("dataId 不存在"));
 
         // 查询链上 hash
-        String chainHash =
-                //fabricClient.queryMetadata(asset.getPath());
-        "db6883c43d8bca8125e28d5168da76cd4428fcddd990971ad6fc74f24497517c";
+        String assetId = asset.getAssetId();
+        String chainHash = fabricClient.queryMetadata(assetId);
+        //"db6883c43d8bca8125e28d5168da76cd4428fcddd990971ad6fc74f24497517c";
 
         // 计算本地 hash
         java.io.File localFile = new java.io.File(asset.getPath());

@@ -32,6 +32,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
+
     <dependencies>
         <!-- 1. Web 核心依赖（包含 Spring MVC、Tomcat 容器、JSON 解析等） -->
         <!-- 替代单独的 webmvc，后端开发首选 starter-web -->
@@ -82,7 +83,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.hyperledger.fabric</groupId>
+            <artifactId>fabric-gateway-java</artifactId>
+            <version>2.2.0</version> <!-- 2.2.x适配JDK17，3.x可自行替换版本号 -->
+        </dependency>
     </dependencies>
 
     <build>

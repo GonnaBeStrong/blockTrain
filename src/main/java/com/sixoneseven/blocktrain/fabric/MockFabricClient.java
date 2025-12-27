@@ -1,5 +1,6 @@
 package com.sixoneseven.blocktrain.fabric;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -8,27 +9,27 @@ import java.time.Instant;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-
 @Component
+@Profile("dev")
 public class MockFabricClient implements FabricClient {
 
-    // 🔗 txId -> fileHash
+    // 🔗 world state: assetId -> hash
     private static final Map<String, String> WORLD_STATE =
             new ConcurrentHashMap<>();
 
     @Override
     public String putMetadata(String assetId, String hash) {
         try {
-            // 1️⃣ 生成 txId
-            String raw = assetId + hash + Instant.now().toEpochMilli() + UUID.randomUUID();
+            // 模拟 txId（仅用于返回）
+            String raw = assetId + hash + System.currentTimeMillis() + UUID.randomUUID();
 
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             String txId = bytesToHex(
                     digest.digest(raw.getBytes(StandardCharsets.UTF_8))
             );
 
-            // 2️⃣ 链上状态：txId -> hash
-            WORLD_STATE.put(txId, hash);
+            // ✅ 正确：assetId -> hash
+            WORLD_STATE.put(assetId, hash);
 
             return txId;
         } catch (Exception e) {
@@ -37,8 +38,8 @@ public class MockFabricClient implements FabricClient {
     }
 
     @Override
-    public String queryMetadata(String txId) {
-        return WORLD_STATE.get(txId);
+    public String queryMetadata(String assetId) {
+        return WORLD_STATE.get(assetId);
     }
 
     private String bytesToHex(byte[] bytes) {
@@ -49,4 +50,3 @@ public class MockFabricClient implements FabricClient {
         return sb.toString();
     }
 }
-
