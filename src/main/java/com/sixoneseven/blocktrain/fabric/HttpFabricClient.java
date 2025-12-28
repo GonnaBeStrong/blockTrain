@@ -20,8 +20,6 @@ import java.net.URL;
 @Profile("prod")
 public class HttpFabricClient implements FabricClient {
 
-    private final RestTemplate restTemplate = new RestTemplate();
-
     private static final String BASE_URL = "http://172.16.1.200:7000/api";
 
     @Override
@@ -30,7 +28,7 @@ public class HttpFabricClient implements FabricClient {
         try
         {
             HttpURLConnection conn = (HttpURLConnection)
-                    new URL("http://172.16.1.200:7000/api/data/" + id).openConnection();
+                    new URL(BASE_URL+ "/data/" + id).openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(3000);
             conn.setReadTimeout(3000);
@@ -74,7 +72,7 @@ public class HttpFabricClient implements FabricClient {
                 """.formatted(id, hashValue);
 
             HttpURLConnection conn = (HttpURLConnection)
-                    new URL("http://172.16.1.200:7000/api/data/create ").openConnection();
+                    new URL(BASE_URL+"/data/create ").openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setConnectTimeout(3000);
