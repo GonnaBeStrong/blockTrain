@@ -84,10 +84,11 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hyperledger.fabric</groupId>
-            <artifactId>fabric-gateway-java</artifactId>
-            <version>2.2.0</version> <!-- 2.2.x适配JDK17，3.x可自行替换版本号 -->
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
         </dependency>
+
     </dependencies>
 
     <build>
