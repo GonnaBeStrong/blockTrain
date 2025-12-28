@@ -41,6 +41,7 @@ public class ZipUtil {
 
             // 3️⃣ credential.json（可信凭证）
             addJson(zos, "credential.json", Map.of(
+                    "fileHash", chainHash,
                     "verifyResult", "PASS",
                     "blockchain", "Hyperledger Fabric"
             ));
