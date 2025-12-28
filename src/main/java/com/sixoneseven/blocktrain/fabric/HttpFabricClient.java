@@ -3,6 +3,7 @@ package com.sixoneseven.blocktrain.fabric;
 // ===== Spring =====
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -20,7 +21,9 @@ import java.net.URL;
 @Profile("prod")
 public class HttpFabricClient implements FabricClient {
 
-    private static final String BASE_URL = "http://172.16.1.200:7000/api";
+    @Value("${api.base.url}")
+    private String BASE_URL;
+
 
     @Override
     public String queryMetadata(String id)
