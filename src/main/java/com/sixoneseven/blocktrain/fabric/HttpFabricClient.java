@@ -52,6 +52,7 @@ public class HttpFabricClient implements FabricClient {
         }
     }
 
+
     @Override
     public String putMetadata(String id, String hashValue)
     {
