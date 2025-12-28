@@ -30,13 +30,17 @@ public class ZipUtil {
                     "dataName", asset.getName(),
                     "dataType", asset.getForm(),
                     "uploadTime", asset.getUploadTime().toString(),
-                    "provider", asset.getFrom()
+                    "provider", asset.getFrom(),
+                    "resolution", asset.getResolution(),
+                    "detail", asset.getDetail(),
+                    "longitude", asset.getLongitude(),
+                    "latitude", asset.getLatitude(),
+                    "lite", asset.getLite(),
+                    "shootTime", asset.getShootTime()
             ));
 
             // 3️⃣ credential.json（可信凭证）
             addJson(zos, "credential.json", Map.of(
-                    "txId", asset.getLite(), // 如果你链上 txId 存在别的字段，请改这里
-                    "fileHash", chainHash,
                     "verifyResult", "PASS",
                     "blockchain", "Hyperledger Fabric"
             ));

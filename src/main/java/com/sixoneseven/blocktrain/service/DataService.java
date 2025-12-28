@@ -111,9 +111,9 @@ public class DataService {
         if (isTrusted) {
             System.out.println("校验成功");
             java.io.File zip = ZipUtil.buildTrustedZip(asset, chainHash);
-            return new DownloadResult(true, zip);
+            return new DownloadResult(true, zip, chainHash, localHash);
         } else {
-            return new DownloadResult(false, null);
+            return new DownloadResult(false, null, chainHash, localHash);
         }
     }
 

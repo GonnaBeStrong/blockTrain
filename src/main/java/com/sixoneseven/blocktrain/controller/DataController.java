@@ -49,18 +49,32 @@ public class DataController {
 
     @GetMapping("/download/by-dataid/{dataId}")
     public ResponseEntity<?> downloadByDataId(@PathVariable String dataId) throws Exception {
+
         DownloadResult result = dataService.downloadZipByDataId(dataId);
+        String chainHash = result.getChainHash();
+        String localHash = result.getLocalHash();
 
         if (result.isTrusted()) {
+
             java.io.File zip = result.getZipFile();
+
             return ResponseEntity.ok()
+                    // 可信凭证 hash
+                    .header("Chain-Hash", chainHash)
+                    .header("Local-Hash", localHash)
+                    // 文件下载
                     .header(HttpHeaders.CONTENT_DISPOSITION,
                             "attachment; filename=trusted_data_" + dataId + ".zip")
                     .body(new FileSystemResource(zip));
+
         } else {
+
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("校验失败，文件不可下载");
+                    .header("Chain-Hash", chainHash)
+                    .header("Local-Hash", localHash)
+                    .body("可信校验失败");
         }
     }
+
 
 }
